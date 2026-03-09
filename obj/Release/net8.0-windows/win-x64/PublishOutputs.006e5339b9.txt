@@ -1,0 +1,6 @@
+E:\아우시스템\다이소 부산\ZplPrinter.exe
+E:\아우시스템\다이소 부산\ZplPrinter.dll
+E:\아우시스템\다이소 부산\ZplPrinter.deps.json
+E:\아우시스템\다이소 부산\ZplPrinter.runtimeconfig.json
+E:\아우시스템\다이소 부산\ZplPrinter.pdb
+E:\아우시스템\다이소 부산\System.IO.Ports.dll
