@@ -11,11 +11,11 @@
       "RelativeMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|solutionrelative:printpreviewform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|d:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\printprogram\\printpreviewform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|D:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\printpreviewform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|solutionrelative:printpreviewform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|d:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\printprogram\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|D:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -50,8 +50,7 @@
               "ToolTip": "C:\\Users\\jjhhy\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\329409681\\PrintResultForm.resx",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2026-03-23T05:10:29.814Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T05:10:29.814Z"
             },
             {
               "$type": "Document",
@@ -61,8 +60,7 @@
               "ToolTip": "C:\\Users\\jjhhy\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\329409681\\PrintResultForm.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T05:10:26.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T05:10:26.802Z"
             },
             {
               "$type": "Document",
@@ -85,7 +83,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAADgv1oAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADsAAAAAAAAAAAAAAFwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-23T04:17:04.834Z",
               "EditorCaption": ""
@@ -99,8 +97,7 @@
               "ToolTip": "D:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.resx",
               "RelativeToolTip": "Form1.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2026-03-23T04:17:02.137Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T04:17:02.137Z"
             },
             {
               "$type": "Document",
@@ -111,8 +108,7 @@
               "ToolTip": "D:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\PrintPreviewForm.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "PrintPreviewForm.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T04:01:13.206Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "WhenOpened": "2026-03-23T04:01:13.206Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "ToolTip": "D:\\study\\02.\uC5C5\uBB34\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "Form1.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T23:02:50.306Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "WhenOpened": "2026-03-08T23:02:50.306Z"
             }
           ]
         }
