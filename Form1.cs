@@ -82,8 +82,12 @@ namespace ZplPrinter
                 lblStatus.Text = $"✓ 인쇄 완료: {portName} → {barcodeDisplay}";
                 lblStatus.ForeColor = System.Drawing.Color.FromArgb(0, 180, 120);
 
-                using var result = new PrintResultForm(barcodeDisplay, barcode, portName);
-                result.ShowDialog();
+                // PrintResultForm 제거: 간단한 안내 메시지로 대체
+                MessageBox.Show(this,
+                    $"포트 {portName} 으로 인쇄 명령이 전달되었습니다.\n출력: {barcodeDisplay}",
+                    "인쇄 완료",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -104,32 +108,32 @@ namespace ZplPrinter
             {
                 // 체크 ON: 바코드 + 포맷 텍스트 출력, BC Human Readable은 항상 N
                 return
-$@"^XA
-^FO360,180
-^A0,50,50^FD{barcodeDisplay}^FS
-^FO200,60
-^BY4
-^BCN,100,N,N,N^FD{barcode}^FS
-^RFW,H,1,2,1^FD3000^FS
-^RFW,A,2,12,1^FD{barcode}^FS
-^RFR,A,^FN1^FS
-^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
-^PQ1
-^XZ
-";
+                        $@"^XA
+                        ^FO360,180
+                        ^A0,50,50^FD{barcodeDisplay}^FS
+                        ^FO200,60
+                        ^BY4
+                        ^BCN,100,N,N,N^FD{barcode}^FS
+                        ^RFW,H,1,2,1^FD3000^FS
+                        ^RFW,A,2,12,1^FD{barcode}^FS
+                        ^RFR,A,^FN1^FS
+                        ^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
+                        ^PQ1
+                        ^XZ
+                        ";
             }
             else
             {
                 // 체크 OFF: 인코딩만, 바코드/텍스트 출력 없음
                 return
-$@"^XA
-^RFW,H,1,2,1^FD3000^FS
-^RFW,A,2,12,1^FD{barcode}^FS
-^RFR,A,^FN1^FS
-^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
-^PQ1
-^XZ
-";
+                        $@"^XA
+                        ^RFW,H,1,2,1^FD3000^FS
+                        ^RFW,A,2,12,1^FD{barcode}^FS
+                        ^RFR,A,^FN1^FS
+                        ^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
+                        ^PQ1
+                        ^XZ
+                        ";
             }
         }
 

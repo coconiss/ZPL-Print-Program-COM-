@@ -52,3 +52,4 @@ D:\study\02.업무\21.다이소(부산)\라벨 프린트 테스트 프로그램\
 D:\study\02.업무\21.다이소(부산)\라벨 프린트 테스트 프로그램\PrintProgram\obj\Debug\net8.0-windows\ZplPrinter.pdb
 D:\study\02.업무\21.다이소(부산)\라벨 프린트 테스트 프로그램\PrintProgram\obj\Debug\net8.0-windows\ZplPrinter.genruntimeconfig.cache
 D:\study\02.업무\21.다이소(부산)\라벨 프린트 테스트 프로그램\PrintProgram\obj\Debug\net8.0-windows\ref\ZplPrinter.dll
+D:\study\02.업무\21.다이소(부산)\라벨 프린트 테스트 프로그램\PrintProgram\obj\Debug\net8.0-windows\ZplPrinter.sourcelink.json

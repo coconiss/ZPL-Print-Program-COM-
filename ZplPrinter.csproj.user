@@ -10,8 +10,5 @@
     <Compile Update="PrintPreviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PrintResultForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>
