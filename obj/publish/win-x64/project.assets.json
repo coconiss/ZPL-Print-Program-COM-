@@ -285,11 +285,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\study\\02.업무\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\files\\ZplPrinter.csproj",
+      "projectUniqueName": "D:\\study\\02.Business\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\ZplPrinter.csproj",
       "projectName": "ZplPrinter",
-      "projectPath": "D:\\study\\02.업무\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\files\\ZplPrinter.csproj",
+      "projectPath": "D:\\study\\02.Business\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\ZplPrinter.csproj",
       "packagesPath": "C:\\Users\\jjhhy\\.nuget\\packages\\",
-      "outputPath": "D:\\study\\02.업무\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\files\\obj\\publish\\win-x64\\",
+      "outputPath": "D:\\study\\02.Business\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\obj\\publish\\win-x64\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

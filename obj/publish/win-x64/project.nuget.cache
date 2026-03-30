@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Cx7kLhxPK0M=",
+  "dgSpecHash": "dVJvEpzzjNQ=",
   "success": true,
-  "projectFilePath": "D:\\study\\02.업무\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\files\\ZplPrinter.csproj",
+  "projectFilePath": "D:\\study\\02.Business\\21.다이소(부산)\\라벨 프린트 테스트 프로그램\\PrintProgram\\ZplPrinter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jjhhy\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
     "C:\\Users\\jjhhy\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",

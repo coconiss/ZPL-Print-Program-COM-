@@ -4,22 +4,47 @@ namespace ZplPrinter
     {
         private System.ComponentModel.IContainer components = null;
 
-        // Controls
+        // ── 공통 레이아웃 ─────────────────────────────────────────────────
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubtitle;
         private System.Windows.Forms.Panel pnlBody;
+        private System.Windows.Forms.Panel pnlFooter;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Label lblStatus;
 
-        private System.Windows.Forms.GroupBox grpPort;
+        // ── 연결 방식 그룹 ────────────────────────────────────────────────
+        private System.Windows.Forms.GroupBox grpConnect;
+        private System.Windows.Forms.RadioButton rdoCom;
+        private System.Windows.Forms.RadioButton rdoUsb;
+        private System.Windows.Forms.RadioButton rdoEthernet;
+
+        // COM 서브 패널
+        private System.Windows.Forms.Panel pnlCom;
         private System.Windows.Forms.Label lblPortLabel;
         private System.Windows.Forms.ComboBox cmbPort;
         private System.Windows.Forms.Button btnRefresh;
 
+        // USB 서브 패널
+        private System.Windows.Forms.Panel pnlUsb;
+        private System.Windows.Forms.Label lblPrinterLabel;
+        private System.Windows.Forms.ComboBox cmbPrinter;
+        private System.Windows.Forms.Button btnRefreshPrinter;
+
+        // Ethernet 서브 패널
+        private System.Windows.Forms.Panel pnlEthernet;
+        private System.Windows.Forms.Label lblIpLabel;
+        private System.Windows.Forms.TextBox txtIpAddress;
+        private System.Windows.Forms.Label lblEthPortLabel;
+        private System.Windows.Forms.TextBox txtEthPort;
+
+        // ── 바코드 그룹 ───────────────────────────────────────────────────
         private System.Windows.Forms.GroupBox grpBarcode;
         private System.Windows.Forms.Label lblBarcodeLabel;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label lblBarcodeHint;
 
+        // ── 라벨 크기 그룹 ────────────────────────────────────────────────
         private System.Windows.Forms.GroupBox grpLabel;
         private System.Windows.Forms.Label lblWidthLabel;
         private System.Windows.Forms.TextBox txtWidth;
@@ -30,12 +55,9 @@ namespace ZplPrinter
         private System.Windows.Forms.Label lblDpiLabel;
         private System.Windows.Forms.Label lblDpiValue;
 
+        // ── 옵션 그룹 ─────────────────────────────────────────────────────
         private System.Windows.Forms.GroupBox grpOptions;
         private System.Windows.Forms.CheckBox chkShowBarcode;
-
-        private System.Windows.Forms.Panel pnlFooter;
-        private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Label lblStatus;
 
         protected override void Dispose(bool disposing)
         {
@@ -75,7 +97,7 @@ namespace ZplPrinter
             lblTitle.AutoSize = true;
 
             lblSubtitle = new System.Windows.Forms.Label();
-            lblSubtitle.Text = "COM Serial Port  ·  ZPL Command  ·  300 DPI";
+            lblSubtitle.Text = "COM Serial  ·  USB (RAW)  ·  Ethernet (TCP)  ·  ZPL  ·  300 DPI";
             lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 8.5f);
             lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(120, 130, 160);
             lblSubtitle.Location = new System.Drawing.Point(26, 44);
@@ -89,30 +111,135 @@ namespace ZplPrinter
             pnlBody.BackColor = System.Drawing.Color.Transparent;
             pnlBody.Location = new System.Drawing.Point(0, 80);
             pnlBody.Size = new System.Drawing.Size(520, 500);
-            pnlBody.Padding = new System.Windows.Forms.Padding(16);
 
-            // GROUP: COM Port
-            grpPort = MakeGroup("COM 포트 선택", 16, 10, 488, 80);
+            // ══ GROUP: 연결 방식 ══════════════════════════════════════════
+            grpConnect = MakeGroup("연결 방식", 16, 10, 488, 160);
 
-            lblPortLabel = MakeLabel("포트:", 12, 28);
+            // 라디오 버튼 (이벤트 등록 전에 Checked 설정)
+            rdoCom = MakeRadio("COM 시리얼", 16, 26);
+            rdoCom.Checked = true;
+            rdoCom.CheckedChanged += new System.EventHandler(this.rdoConnect_CheckedChanged);
+
+            rdoUsb = MakeRadio("USB", 150, 26);
+            rdoUsb.CheckedChanged += new System.EventHandler(this.rdoConnect_CheckedChanged);
+
+            rdoEthernet = MakeRadio("Ethernet (TCP/IP)", 224, 26);
+            rdoEthernet.CheckedChanged += new System.EventHandler(this.rdoConnect_CheckedChanged);
+
+            // ── COM 서브 패널 ─────────────────────────────────────────────
+            pnlCom = new System.Windows.Forms.Panel();
+            pnlCom.BackColor = System.Drawing.Color.Transparent;
+            pnlCom.Location = new System.Drawing.Point(8, 54);
+            pnlCom.Size = new System.Drawing.Size(468, 90);
+            pnlCom.Visible = true;
+
+            lblPortLabel = MakeLabel("포트:", 4, 14);
+
             cmbPort = new System.Windows.Forms.ComboBox();
-            cmbPort.Location = new System.Drawing.Point(70, 24);
-            cmbPort.Size = new System.Drawing.Size(300, 28);
+            cmbPort.Location = new System.Drawing.Point(62, 10);
+            cmbPort.Size = new System.Drawing.Size(270, 28);
             cmbPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbPort.BackColor = System.Drawing.Color.FromArgb(30, 30, 50);
             cmbPort.ForeColor = System.Drawing.Color.White;
             cmbPort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             cmbPort.Font = new System.Drawing.Font("Segoe UI", 10f);
 
-            btnRefresh = MakeButton("↻ 새로고침", 382, 23, 90, 30);
+            btnRefresh = MakeButton("↻ 새로고침", 344, 9, 100, 30);
             btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
 
-            grpPort.Controls.AddRange(new System.Windows.Forms.Control[] { lblPortLabel, cmbPort, btnRefresh });
+            var lblComHint = new System.Windows.Forms.Label();
+            lblComHint.Text = "통신 파라미터: 9600 bps / 데이터비트 8 / 패리티 없음 / 스톱비트 1";
+            lblComHint.Font = new System.Drawing.Font("Segoe UI", 8f);
+            lblComHint.ForeColor = System.Drawing.Color.FromArgb(120, 130, 160);
+            lblComHint.Location = new System.Drawing.Point(4, 50);
+            lblComHint.AutoSize = true;
 
-            // GROUP: Barcode
-            grpBarcode = MakeGroup("바코드 입력 (12자리 숫자)", 16, 105, 488, 100);
+            pnlCom.Controls.AddRange(new System.Windows.Forms.Control[] {
+                lblPortLabel, cmbPort, btnRefresh, lblComHint
+            });
+
+            // ── USB 서브 패널 ─────────────────────────────────────────────
+            pnlUsb = new System.Windows.Forms.Panel();
+            pnlUsb.BackColor = System.Drawing.Color.Transparent;
+            pnlUsb.Location = new System.Drawing.Point(8, 54);
+            pnlUsb.Size = new System.Drawing.Size(468, 90);
+            pnlUsb.Visible = false;
+
+            lblPrinterLabel = MakeLabel("프린터:", 4, 14);
+
+            cmbPrinter = new System.Windows.Forms.ComboBox();
+            cmbPrinter.Location = new System.Drawing.Point(72, 10);
+            cmbPrinter.Size = new System.Drawing.Size(260, 28);
+            cmbPrinter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbPrinter.BackColor = System.Drawing.Color.FromArgb(30, 30, 50);
+            cmbPrinter.ForeColor = System.Drawing.Color.White;
+            cmbPrinter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            cmbPrinter.Font = new System.Drawing.Font("Segoe UI", 9.5f);
+
+            btnRefreshPrinter = MakeButton("↻ 새로고침", 344, 9, 100, 30);
+            btnRefreshPrinter.Click += new System.EventHandler(this.btnRefreshPrinter_Click);
+
+            var lblUsbHint = new System.Windows.Forms.Label();
+            lblUsbHint.Text = "Windows 설치 프린터 목록 · ZPL RAW 데이터 직접 전송 (winspool.drv)";
+            lblUsbHint.Font = new System.Drawing.Font("Segoe UI", 8f);
+            lblUsbHint.ForeColor = System.Drawing.Color.FromArgb(120, 130, 160);
+            lblUsbHint.Location = new System.Drawing.Point(4, 50);
+            lblUsbHint.AutoSize = true;
+
+            pnlUsb.Controls.AddRange(new System.Windows.Forms.Control[] {
+                lblPrinterLabel, cmbPrinter, btnRefreshPrinter, lblUsbHint
+            });
+
+            // ── Ethernet 서브 패널 ────────────────────────────────────────
+            pnlEthernet = new System.Windows.Forms.Panel();
+            pnlEthernet.BackColor = System.Drawing.Color.Transparent;
+            pnlEthernet.Location = new System.Drawing.Point(8, 54);
+            pnlEthernet.Size = new System.Drawing.Size(468, 90);
+            pnlEthernet.Visible = false;
+
+            lblIpLabel = MakeLabel("IP 주소:", 4, 14);
+
+            txtIpAddress = new System.Windows.Forms.TextBox();
+            txtIpAddress.Location = new System.Drawing.Point(78, 10);
+            txtIpAddress.Size = new System.Drawing.Size(160, 28);
+            txtIpAddress.BackColor = System.Drawing.Color.FromArgb(30, 30, 50);
+            txtIpAddress.ForeColor = System.Drawing.Color.FromArgb(100, 210, 255);
+            txtIpAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtIpAddress.Font = new System.Drawing.Font("Consolas", 11f);
+            txtIpAddress.Text = "192.168.1.100";
+
+            lblEthPortLabel = MakeLabel("포트:", 252, 14);
+
+            txtEthPort = new System.Windows.Forms.TextBox();
+            txtEthPort.Location = new System.Drawing.Point(296, 10);
+            txtEthPort.Size = new System.Drawing.Size(76, 28);
+            txtEthPort.BackColor = System.Drawing.Color.FromArgb(30, 30, 50);
+            txtEthPort.ForeColor = System.Drawing.Color.FromArgb(255, 200, 80);
+            txtEthPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtEthPort.Font = new System.Drawing.Font("Consolas", 11f);
+            txtEthPort.Text = "9100";
+
+            var lblEthHint = new System.Windows.Forms.Label();
+            lblEthHint.Text = "기본 포트: 9100 (Zebra ZPL 표준) · TCP 소켓 전송 · 연결 타임아웃 5초";
+            lblEthHint.Font = new System.Drawing.Font("Segoe UI", 8f);
+            lblEthHint.ForeColor = System.Drawing.Color.FromArgb(120, 130, 160);
+            lblEthHint.Location = new System.Drawing.Point(4, 50);
+            lblEthHint.AutoSize = true;
+
+            pnlEthernet.Controls.AddRange(new System.Windows.Forms.Control[] {
+                lblIpLabel, txtIpAddress, lblEthPortLabel, txtEthPort, lblEthHint
+            });
+
+            grpConnect.Controls.AddRange(new System.Windows.Forms.Control[] {
+                rdoCom, rdoUsb, rdoEthernet,
+                pnlCom, pnlUsb, pnlEthernet
+            });
+
+            // ══ GROUP: 바코드 입력 ════════════════════════════════════════
+            grpBarcode = MakeGroup("바코드 입력 (12자리 숫자)", 16, 185, 488, 100);
 
             lblBarcodeLabel = MakeLabel("바코드:", 12, 28);
+
             txtBarcode = new System.Windows.Forms.TextBox();
             txtBarcode.Location = new System.Drawing.Point(90, 24);
             txtBarcode.Size = new System.Drawing.Size(260, 28);
@@ -130,10 +257,12 @@ namespace ZplPrinter
             lblBarcodeHint.Location = new System.Drawing.Point(12, 62);
             lblBarcodeHint.AutoSize = true;
 
-            grpBarcode.Controls.AddRange(new System.Windows.Forms.Control[] { lblBarcodeLabel, txtBarcode, lblBarcodeHint });
+            grpBarcode.Controls.AddRange(new System.Windows.Forms.Control[] {
+                lblBarcodeLabel, txtBarcode, lblBarcodeHint
+            });
 
-            // GROUP: Label Size
-            grpLabel = MakeGroup("라벨 크기 (단위: mm)", 16, 220, 488, 110);
+            // ══ GROUP: 라벨 크기 ══════════════════════════════════════════
+            grpLabel = MakeGroup("라벨 크기 (단위: mm)", 16, 300, 488, 110);
 
             lblWidthLabel = MakeLabel("가로 (W):", 12, 30);
             txtWidth = MakeNumericTextBox(100, 26, 110, 28);
@@ -159,8 +288,8 @@ namespace ZplPrinter
                 lblDpiLabel, lblDpiValue
             });
 
-            // GROUP: Options
-            grpOptions = MakeGroup("인쇄 옵션", 16, 345, 488, 70);
+            // ══ GROUP: 인쇄 옵션 ══════════════════════════════════════════
+            grpOptions = MakeGroup("인쇄 옵션", 16, 425, 488, 70);
 
             chkShowBarcode = new System.Windows.Forms.CheckBox();
             chkShowBarcode.Text = "바코드 아래 숫자 텍스트 출력 (Human Readable)";
@@ -174,7 +303,7 @@ namespace ZplPrinter
             grpOptions.Controls.Add(chkShowBarcode);
 
             pnlBody.Controls.AddRange(new System.Windows.Forms.Control[] {
-                grpPort, grpBarcode, grpLabel, grpOptions
+                grpConnect, grpBarcode, grpLabel, grpOptions
             });
 
             // ── Footer ────────────────────────────────────────────────────
@@ -211,6 +340,19 @@ namespace ZplPrinter
         }
 
         // ── Helpers ───────────────────────────────────────────────────────
+        private static System.Windows.Forms.RadioButton MakeRadio(string text, int x, int y)
+        {
+            var r = new System.Windows.Forms.RadioButton();
+            r.Text = text;
+            r.Font = new System.Drawing.Font("Segoe UI", 9.5f, System.Drawing.FontStyle.Bold);
+            r.ForeColor = System.Drawing.Color.FromArgb(200, 210, 230);
+            r.Location = new System.Drawing.Point(x, y);
+            r.AutoSize = true;
+            r.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            r.Cursor = System.Windows.Forms.Cursors.Hand;
+            return r;
+        }
+
         private static System.Windows.Forms.GroupBox MakeGroup(string title, int x, int y, int w, int h)
         {
             var g = new System.Windows.Forms.GroupBox();
