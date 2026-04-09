@@ -58,6 +58,8 @@ namespace ZplPrinter
         // ── 옵션 그룹 ─────────────────────────────────────────────────────
         private System.Windows.Forms.GroupBox grpOptions;
         private System.Windows.Forms.CheckBox chkShowBarcode;
+        private System.Windows.Forms.CheckBox chkAutoPrint;
+        private System.Windows.Forms.CheckBox chkDoublePrint;
 
         protected override void Dispose(bool disposing)
         {
@@ -73,9 +75,9 @@ namespace ZplPrinter
 
             // ── Form ──────────────────────────────────────────────────────
             this.Text = "ZPL Barcode Printer";
-            this.Size = new System.Drawing.Size(520, 680);
-            this.MinimumSize = new System.Drawing.Size(520, 680);
-            this.MaximumSize = new System.Drawing.Size(520, 680);
+            this.Size = new System.Drawing.Size(535, 710);
+            this.MinimumSize = new System.Drawing.Size(535, 710);
+            this.MaximumSize = new System.Drawing.Size(535, 710);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.BackColor = System.Drawing.Color.FromArgb(18, 18, 28);
             this.ForeColor = System.Drawing.Color.White;
@@ -110,10 +112,10 @@ namespace ZplPrinter
             pnlBody = new System.Windows.Forms.Panel();
             pnlBody.BackColor = System.Drawing.Color.Transparent;
             pnlBody.Location = new System.Drawing.Point(0, 80);
-            pnlBody.Size = new System.Drawing.Size(520, 500);
+            pnlBody.Size = new System.Drawing.Size(520, 520);
 
             // ══ GROUP: 연결 방식 ══════════════════════════════════════════
-            grpConnect = MakeGroup("연결 방식", 16, 10, 488, 160);
+            grpConnect = MakeGroup("연결 방식", 16, 10, 488, 140);
 
             // 라디오 버튼 (이벤트 등록 전에 Checked 설정)
             rdoCom = MakeRadio("COM 시리얼", 16, 26);
@@ -236,7 +238,7 @@ namespace ZplPrinter
             });
 
             // ══ GROUP: 바코드 입력 ════════════════════════════════════════
-            grpBarcode = MakeGroup("바코드 입력 (12자리 숫자)", 16, 185, 488, 100);
+            grpBarcode = MakeGroup("바코드 입력 (12자리 숫자)", 16, 165, 488, 100);
 
             lblBarcodeLabel = MakeLabel("바코드:", 12, 28);
 
@@ -262,7 +264,7 @@ namespace ZplPrinter
             });
 
             // ══ GROUP: 라벨 크기 ══════════════════════════════════════════
-            grpLabel = MakeGroup("라벨 크기 (단위: mm)", 16, 300, 488, 110);
+            grpLabel = MakeGroup("라벨 크기 (단위: mm)", 16, 280, 488, 110);
 
             lblWidthLabel = MakeLabel("가로 (W):", 12, 30);
             txtWidth = MakeNumericTextBox(100, 26, 110, 28);
@@ -289,7 +291,8 @@ namespace ZplPrinter
             });
 
             // ══ GROUP: 인쇄 옵션 ══════════════════════════════════════════
-            grpOptions = MakeGroup("인쇄 옵션", 16, 425, 488, 70);
+            // 위치를 조금 위로 올리고 높이를 조정하여 pnlBody 내부에 완전히 보이도록 함
+            grpOptions = MakeGroup("인쇄 옵션", 16, 410, 488, 110);
 
             chkShowBarcode = new System.Windows.Forms.CheckBox();
             chkShowBarcode.Text = "바코드 아래 숫자 텍스트 출력 (Human Readable)";
@@ -300,7 +303,25 @@ namespace ZplPrinter
             chkShowBarcode.Checked = true;
             chkShowBarcode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 
-            grpOptions.Controls.Add(chkShowBarcode);
+            chkAutoPrint = new System.Windows.Forms.CheckBox();
+            chkAutoPrint.Text = "자동 발행 모드 (미리보기 없이 즉시 인쇄)";
+            chkAutoPrint.Font = new System.Drawing.Font("Segoe UI", 10f);
+            chkAutoPrint.ForeColor = System.Drawing.Color.FromArgb(200, 210, 230);
+            chkAutoPrint.Location = new System.Drawing.Point(16, 52);
+            chkAutoPrint.AutoSize = true;
+            chkAutoPrint.Checked = false;
+            chkAutoPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+
+            chkDoublePrint = new System.Windows.Forms.CheckBox();
+            chkDoublePrint.Text = "2장씩 발행 (연속)";
+            chkDoublePrint.Font = new System.Drawing.Font("Segoe UI", 10f);
+            chkDoublePrint.ForeColor = System.Drawing.Color.FromArgb(200, 210, 230);
+            chkDoublePrint.Location = new System.Drawing.Point(16, 76);
+            chkDoublePrint.AutoSize = true;
+            chkDoublePrint.Checked = false;
+            chkDoublePrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+
+            grpOptions.Controls.AddRange(new System.Windows.Forms.Control[] { chkShowBarcode, chkAutoPrint, chkDoublePrint });
 
             pnlBody.Controls.AddRange(new System.Windows.Forms.Control[] {
                 grpConnect, grpBarcode, grpLabel, grpOptions
@@ -309,7 +330,7 @@ namespace ZplPrinter
             // ── Footer ────────────────────────────────────────────────────
             pnlFooter = new System.Windows.Forms.Panel();
             pnlFooter.BackColor = System.Drawing.Color.FromArgb(22, 22, 36);
-            pnlFooter.Location = new System.Drawing.Point(0, 580);
+            pnlFooter.Location = new System.Drawing.Point(0, 600);
             pnlFooter.Size = new System.Drawing.Size(520, 70);
 
             btnPrint = new System.Windows.Forms.Button();
