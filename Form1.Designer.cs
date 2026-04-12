@@ -318,7 +318,7 @@ namespace ZplPrinter
             chkDoublePrint.ForeColor = System.Drawing.Color.FromArgb(200, 210, 230);
             chkDoublePrint.Location = new System.Drawing.Point(16, 76);
             chkDoublePrint.AutoSize = true;
-            chkDoublePrint.Checked = false;
+            chkDoublePrint.Checked = true;
             chkDoublePrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 
             grpOptions.Controls.AddRange(new System.Windows.Forms.Control[] { chkShowBarcode, chkAutoPrint, chkDoublePrint });
