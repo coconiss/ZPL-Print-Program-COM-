@@ -27,7 +27,7 @@
       "RelativeMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|d:\\study\\02.business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\printprogram\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{4185DCF1-DCA1-1F81-5046-1BD941D91FA8}|ZplPrinter.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -51,15 +51,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ZplPrinter",
+              "Title": "ZplPrinter.csproj",
               "DocumentMoniker": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\ZplPrinter.csproj",
               "RelativeDocumentMoniker": "ZplPrinter.csproj",
               "ToolTip": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\ZplPrinter.csproj",
               "RelativeToolTip": "ZplPrinter.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-13T00:55:01.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T00:55:01.037Z"
             },
             {
               "$type": "Document",
@@ -71,20 +70,19 @@
               "RelativeToolTip": "Form1.resx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4CAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2026-04-13T00:42:24.673Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T00:42:24.673Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Form1.cs [\uB514\uC790\uC778]",
+              "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.cs [\uB514\uC790\uC778]",
-              "RelativeToolTip": "Form1.cs [\uB514\uC790\uC778]",
+              "ToolTip": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-13T00:39:17.213Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -96,8 +94,7 @@
               "RelativeToolTip": "README.md",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2026-04-12T23:53:27.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-12T23:53:27.595Z"
             },
             {
               "$type": "Document",
@@ -109,8 +106,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-09T00:36:39.073Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-09T00:36:39.073Z"
             },
             {
               "$type": "Document",
@@ -120,10 +116,9 @@
               "RelativeDocumentMoniker": "PrintPreviewForm.cs",
               "ToolTip": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\PrintPreviewForm.cs",
               "RelativeToolTip": "PrintPreviewForm.cs",
-              "ViewState": "AgIAANUAAAAAAAAAAAAcwOwAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAPwAAAAAAAAAAAAAAEwBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T05:09:40.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T05:09:40.084Z"
             },
             {
               "$type": "Document",
@@ -133,7 +128,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAEoBAAAAAAAAAAAiwG4BAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAGQBAAAAAAAAAAAYwIEBAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-23T04:17:04.834Z",
               "EditorCaption": ""
@@ -144,9 +139,9 @@
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Form1.Designer.cs",
-              "ToolTip": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.Designer.cs*",
-              "RelativeToolTip": "Form1.Designer.cs*",
-              "ViewState": "AgIAAPEAAAAAAAAAAAAqwB0BAAAmAAAAAAAAAA==",
+              "ToolTip": "D:\\study\\02.Business\\21.\uB2E4\uC774\uC18C(\uBD80\uC0B0)\\\uB77C\uBCA8 \uD504\uB9B0\uD2B8 \uD14C\uC2A4\uD2B8 \uD504\uB85C\uADF8\uB7A8\\PrintProgram\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AgIAABUBAAAAAAAAAAAqwDIBAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-30T03:58:55.853Z",
               "EditorCaption": ""

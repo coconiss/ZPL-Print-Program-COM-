@@ -261,7 +261,7 @@ namespace ZplPrinter
             txtBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBarcode_KeyPress);
 
             lblBarcodeHint = new System.Windows.Forms.Label();
-            lblBarcodeHint.Text = "예) 252190021426  →  출력: 252-19-0021426";
+            lblBarcodeHint.Text = "예) 25260000001  →  출력: 252-26-0000001";
             lblBarcodeHint.Font = new System.Drawing.Font("Segoe UI", 8f);
             lblBarcodeHint.ForeColor = System.Drawing.Color.FromArgb(120, 130, 160);
             lblBarcodeHint.Location = new System.Drawing.Point(12, 62);
@@ -277,11 +277,13 @@ namespace ZplPrinter
             lblWidthLabel = MakeLabel("가로 (W):", 12, 30);
             txtWidth = MakeNumericTextBox(100, 26, 110, 28);
             txtWidth.Text = "94";
+            txtWidth.Enabled = false;
             lblWidthUnit = MakeLabel("mm", 222, 30);
 
             lblHeightLabel = MakeLabel("세로 (H):", 12, 68);
             txtHeight = MakeNumericTextBox(100, 64, 110, 28);
             txtHeight.Text = "26";
+            txtHeight.Enabled = false;
             lblHeightUnit = MakeLabel("mm", 222, 68);
 
             lblDpiLabel = MakeLabel("DPI:", 300, 30);
@@ -302,7 +304,7 @@ namespace ZplPrinter
             grpOptions = MakeGroup("인쇄 옵션", 16, 405, 488, 110);
 
             chkShowBarcode = new System.Windows.Forms.CheckBox();
-            chkShowBarcode.Text = "바코드 아래 숫자 텍스트 출력 (Human Readable)";
+            chkShowBarcode.Text = "바코드 인쇄 (Human Readable)";
             chkShowBarcode.Font = new System.Drawing.Font("Segoe UI", 10f);
             chkShowBarcode.ForeColor = System.Drawing.Color.FromArgb(200, 210, 230);
             chkShowBarcode.Location = new System.Drawing.Point(16, 28);
@@ -311,7 +313,7 @@ namespace ZplPrinter
             chkShowBarcode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 
             chkAutoPrint = new System.Windows.Forms.CheckBox();
-            chkAutoPrint.Text = "자동 발행 모드 (미리보기 없이 즉시 인쇄)";
+            chkAutoPrint.Text = "스캔 즉시 발행";
             chkAutoPrint.Font = new System.Drawing.Font("Segoe UI", 10f);
             chkAutoPrint.ForeColor = System.Drawing.Color.FromArgb(200, 210, 230);
             chkAutoPrint.Location = new System.Drawing.Point(16, 52);

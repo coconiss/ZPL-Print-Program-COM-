@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZplPrinter")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+beee44f8d900cacc6752ce9aac9c4fe95349eb2f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9884f21da5540ca6537918aa5ba431d3a088169b")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZplPrinter")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZplPrinter")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
