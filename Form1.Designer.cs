@@ -1,3 +1,5 @@
+using System;
+
 namespace ZplPrinter
 {
     partial class Form1
@@ -61,6 +63,12 @@ namespace ZplPrinter
         private System.Windows.Forms.CheckBox chkAutoPrint;
         private System.Windows.Forms.CheckBox chkDoublePrint;
 
+        // ── 스캔 목록 그룹 ────────────────────────────────────────────────
+        private System.Windows.Forms.GroupBox grpBarcodeList;
+        private System.Windows.Forms.ListBox lstBarcodes;
+        private System.Windows.Forms.Label lblScanCount;
+        private System.Windows.Forms.Button btnClearList;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -75,15 +83,16 @@ namespace ZplPrinter
 
             // ── Form ──────────────────────────────────────────────────────
             this.Text = "ZPL Barcode Printer";
-            this.Size = new System.Drawing.Size(535, 710);
-            this.MinimumSize = new System.Drawing.Size(535, 710);
-            this.MaximumSize = new System.Drawing.Size(535, 710);
+            this.Size = new System.Drawing.Size(535, 880);
+            this.MinimumSize = new System.Drawing.Size(535, 880);
+            this.MaximumSize = new System.Drawing.Size(535, 880);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.BackColor = System.Drawing.Color.FromArgb(18, 18, 28);
             this.ForeColor = System.Drawing.Color.White;
             this.Font = new System.Drawing.Font("Segoe UI", 9.5f);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.Icon = new System.Drawing.Icon(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo_blue_without_text.ico"));
 
             // ── Header ────────────────────────────────────────────────────
             pnlHeader = new System.Windows.Forms.Panel();
@@ -108,16 +117,15 @@ namespace ZplPrinter
             pnlHeader.Controls.Add(lblTitle);
             pnlHeader.Controls.Add(lblSubtitle);
 
-            // ── Body ──────────────────────────────────────────────────────
+            // ── Body (높이 690 = 기존 520 + 스캔목록 그룹 170) ───────────
             pnlBody = new System.Windows.Forms.Panel();
             pnlBody.BackColor = System.Drawing.Color.Transparent;
             pnlBody.Location = new System.Drawing.Point(0, 80);
-            pnlBody.Size = new System.Drawing.Size(520, 520);
+            pnlBody.Size = new System.Drawing.Size(520, 690);
 
             // ══ GROUP: 연결 방식 ══════════════════════════════════════════
             grpConnect = MakeGroup("연결 방식", 16, 10, 488, 140);
 
-            // 라디오 버튼 (이벤트 등록 전에 Checked 설정)
             rdoCom = MakeRadio("COM 시리얼", 16, 26);
             rdoCom.Checked = true;
             rdoCom.CheckedChanged += new System.EventHandler(this.rdoConnect_CheckedChanged);
@@ -291,8 +299,7 @@ namespace ZplPrinter
             });
 
             // ══ GROUP: 인쇄 옵션 ══════════════════════════════════════════
-            // 위치를 조금 위로 올리고 높이를 조정하여 pnlBody 내부에 완전히 보이도록 함
-            grpOptions = MakeGroup("인쇄 옵션", 16, 410, 488, 110);
+            grpOptions = MakeGroup("인쇄 옵션", 16, 405, 488, 110);
 
             chkShowBarcode = new System.Windows.Forms.CheckBox();
             chkShowBarcode.Text = "바코드 아래 숫자 텍스트 출력 (Human Readable)";
@@ -321,16 +328,50 @@ namespace ZplPrinter
             chkDoublePrint.Checked = true;
             chkDoublePrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 
-            grpOptions.Controls.AddRange(new System.Windows.Forms.Control[] { chkShowBarcode, chkAutoPrint, chkDoublePrint });
-
-            pnlBody.Controls.AddRange(new System.Windows.Forms.Control[] {
-                grpConnect, grpBarcode, grpLabel, grpOptions
+            grpOptions.Controls.AddRange(new System.Windows.Forms.Control[] {
+                chkShowBarcode, chkAutoPrint, chkDoublePrint
             });
 
-            // ── Footer ────────────────────────────────────────────────────
+            // ══ GROUP: 스캔된 바코드 목록 (자동 발행 OFF 일 때 사용) ══════
+            grpBarcodeList = MakeGroup("스캔된 바코드 목록  (자동 발행 OFF 시 사용)", 16, 530, 488, 155);
+
+            // 상단 행: 카운트 + 초기화 버튼
+            var lblScanCountTitle = MakeLabel("스캔된 바코드 수:", 12, 26);
+
+            lblScanCount = new System.Windows.Forms.Label();
+            lblScanCount.Text = "0 개";
+            lblScanCount.Font = new System.Drawing.Font("Consolas", 11f, System.Drawing.FontStyle.Bold);
+            lblScanCount.ForeColor = System.Drawing.Color.FromArgb(100, 210, 255);
+            lblScanCount.Location = new System.Drawing.Point(158, 24);
+            lblScanCount.AutoSize = true;
+
+            btnClearList = MakeButton("✕  목록 초기화", 356, 20, 116, 30);
+            btnClearList.ForeColor = System.Drawing.Color.FromArgb(255, 140, 120);
+            btnClearList.Click += new System.EventHandler(this.btnClearList_Click);
+
+            // 목록 ListBox
+            lstBarcodes = new System.Windows.Forms.ListBox();
+            lstBarcodes.Location = new System.Drawing.Point(12, 58);
+            lstBarcodes.Size = new System.Drawing.Size(460, 88);
+            lstBarcodes.BackColor = System.Drawing.Color.FromArgb(20, 20, 36);
+            lstBarcodes.ForeColor = System.Drawing.Color.FromArgb(100, 210, 255);
+            lstBarcodes.Font = new System.Drawing.Font("Consolas", 10f);
+            lstBarcodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            lstBarcodes.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            lstBarcodes.IntegralHeight = false;
+
+            grpBarcodeList.Controls.AddRange(new System.Windows.Forms.Control[] {
+                lblScanCountTitle, lblScanCount, btnClearList, lstBarcodes
+            });
+
+            pnlBody.Controls.AddRange(new System.Windows.Forms.Control[] {
+                grpConnect, grpBarcode, grpLabel, grpOptions, grpBarcodeList
+            });
+
+            // ── Footer (y = 80 + 690 = 770) ───────────────────────────────
             pnlFooter = new System.Windows.Forms.Panel();
             pnlFooter.BackColor = System.Drawing.Color.FromArgb(22, 22, 36);
-            pnlFooter.Location = new System.Drawing.Point(0, 600);
+            pnlFooter.Location = new System.Drawing.Point(0, 770);
             pnlFooter.Size = new System.Drawing.Size(520, 70);
 
             btnPrint = new System.Windows.Forms.Button();
