@@ -610,29 +610,29 @@ namespace ZplPrinter
             if (showBarcode)
             {
                 return
-$@"^XA
-^FO360,180
-^A0,50,50^FD{barcodeDisplay}^FS
-^FO200,60
-^BY4
-^BCN,100,N,N,N^FD{barcode}^FS
-^RFW,H,1,2,1^FD3000^FS
-^RFW,A,2,12,1^FD{barcode}^FS
-^RFR,A,^FN1^FS
-^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
-^PQ1
-^XZ";
+                        $@"^XA
+                        ^FO360,180
+                        ^A0,50,50^FD{barcodeDisplay}^FS
+                        ^FO200,60
+                        ^BY4
+                        ^BCN,100,N,N,N^FD{barcode}^FS
+                        ^RFW,H,1,2,1^FD3000^FS
+                        ^RFW,A,2,12,1^FD{barcode}^FS
+                        ^RFR,A,^FN1^FS
+                        ^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
+                        ^PQ1
+                        ^XZ";
             }
             else
             {
                 return
-$@"^XA
-^RFW,H,1,2,1^FD3000^FS
-^RFW,A,2,12,1^FD{barcode}^FS
-^RFR,A,^FN1^FS
-^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
-^PQ1
-^XZ";
+                        $@"^XA
+                        ^RFW,H,1,2,1^FD3000^FS
+                        ^RFW,A,2,12,1^FD{barcode}^FS
+                        ^RFR,A,^FN1^FS
+                        ^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
+                        ^PQ1
+                        ^XZ";
             }
         }
 

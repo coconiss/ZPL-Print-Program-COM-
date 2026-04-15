@@ -9,11 +9,14 @@
     <AssemblyName>ZplPrinter</AssemblyName>
     <RootNamespace>ZplPrinter</RootNamespace>
     <Platforms>AnyCPU</Platforms>
-    <PublishSingleFile>true</PublishSingleFile>
-    <SelfContained>true</SelfContained>
+    <SelfContained>false</SelfContained>
     <PublishTrimmed>false</PublishTrimmed>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <ApplicationIcon>logo_blue_without_text.ico</ApplicationIcon>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	<PublishSingleFile>false</PublishSingleFile>
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
