@@ -72,7 +72,6 @@ namespace ZplPrinter
             rdoCom.CheckedChanged += (s, e) => SaveUserSettings();
             rdoUsb.CheckedChanged += (s, e) => SaveUserSettings();
             rdoEthernet.CheckedChanged += (s, e) => SaveUserSettings();
-
         }
 
         private void Form1_Shown(object sender, EventArgs e) => txtBarcode.Focus();
@@ -86,7 +85,7 @@ namespace ZplPrinter
 
             string mode = rdoCom.Checked ? "COM 시리얼"
                         : rdoUsb.Checked ? "USB (RAW)"
-                                               : "Ethernet (TCP/IP)";
+                                         : "Ethernet (TCP/IP)";
             SetStatus($"연결 방식: {mode}", success: true);
             SaveUserSettings();
         }
@@ -194,7 +193,8 @@ namespace ZplPrinter
             SetStatus("COM 포트 목록을 새로고침했습니다.", success: true);
         }
 
-        private bool PrintViaCom(string zpl, string barcodeDisplay, bool showMessageBox = true, int copies = 1)
+        // copies 파라미터 제거 — ZPL 내 ^PQ로 매수 제어
+        private bool PrintViaCom(string zpl, string barcodeDisplay, bool showMessageBox = true)
         {
             if (cmbPort.SelectedItem == null ||
                 cmbPort.SelectedItem.ToString() == "사용 가능한 포트 없음")
@@ -218,12 +218,9 @@ namespace ZplPrinter
                 _serialPort.Open();
 
                 byte[] bytes = Encoding.ASCII.GetBytes(zpl);
-                for (int i = 0; i < copies; i++)
-                {
-                    _serialPort.BaseStream.Write(bytes, 0, bytes.Length);
-                    _serialPort.BaseStream.Flush();
-                    System.Threading.Thread.Sleep(120);
-                }
+                _serialPort.BaseStream.Write(bytes, 0, bytes.Length);
+                _serialPort.BaseStream.Flush();
+
                 _serialPort.Close();
 
                 SetStatus($"✓ [COM] 인쇄 완료: {portName} → {barcodeDisplay}", success: true);
@@ -260,7 +257,8 @@ namespace ZplPrinter
             SetStatus("프린터 목록을 새로고침했습니다.", success: true);
         }
 
-        private bool PrintViaUsb(string zpl, string barcodeDisplay, bool showMessageBox = true, int copies = 1)
+        // copies 파라미터 제거 — ZPL 내 ^PQ로 매수 제어
+        private bool PrintViaUsb(string zpl, string barcodeDisplay, bool showMessageBox = true)
         {
             if (cmbPrinter.SelectedItem == null ||
                 cmbPrinter.SelectedItem.ToString() == "설치된 프린터 없음")
@@ -272,11 +270,8 @@ namespace ZplPrinter
             string printerName = cmbPrinter.SelectedItem.ToString()!;
             try
             {
-                for (int i = 0; i < copies; i++)
-                {
-                    SendRawToPrinter(printerName, zpl);
-                    System.Threading.Thread.Sleep(120);
-                }
+                SendRawToPrinter(printerName, zpl);
+
                 SetStatus($"✓ [USB] 인쇄 완료: {printerName} → {barcodeDisplay}", success: true);
                 if (showMessageBox)
                     MessageBox.Show(this,
@@ -331,7 +326,9 @@ namespace ZplPrinter
         // ══════════════════════════════════════════════════════════════════
         // Ethernet (TCP/IP 소켓)
         // ══════════════════════════════════════════════════════════════════
-        private bool PrintViaEthernet(string zpl, string barcodeDisplay, bool showMessageBox = true, int copies = 1)
+
+        // copies 파라미터 제거 — ZPL 내 ^PQ로 매수 제어
+        private bool PrintViaEthernet(string zpl, string barcodeDisplay, bool showMessageBox = true)
         {
             string ip = txtIpAddress.Text.Trim();
             if (string.IsNullOrEmpty(ip)) { ShowError("IP 주소를 입력해주세요."); return false; }
@@ -344,19 +341,15 @@ namespace ZplPrinter
 
             try
             {
-                for (int i = 0; i < copies; i++)
-                {
-                    using var client = new TcpClient();
-                    bool connected = client.ConnectAsync(ip, port).Wait(TimeSpan.FromSeconds(5));
-                    if (!connected)
-                        throw new TimeoutException($"연결 시간 초과 ({ip}:{port})\nIP 주소와 포트를 확인해주세요.");
+                using var client = new TcpClient();
+                bool connected = client.ConnectAsync(ip, port).Wait(TimeSpan.FromSeconds(5));
+                if (!connected)
+                    throw new TimeoutException($"연결 시간 초과 ({ip}:{port})\nIP 주소와 포트를 확인해주세요.");
 
-                    using var stream = client.GetStream();
-                    byte[] bytes = Encoding.ASCII.GetBytes(zpl);
-                    stream.Write(bytes, 0, bytes.Length);
-                    stream.Flush();
-                    System.Threading.Thread.Sleep(120);
-                }
+                using var stream = client.GetStream();
+                byte[] bytes = Encoding.ASCII.GetBytes(zpl);
+                stream.Write(bytes, 0, bytes.Length);
+                stream.Flush();
 
                 SetStatus($"✓ [Ethernet] 인쇄 완료: {ip}:{port} → {barcodeDisplay}", success: true);
                 if (showMessageBox)
@@ -408,17 +401,17 @@ namespace ZplPrinter
                 return;
             }
 
+            int copies = chkDoublePrint.Checked ? 2 : 1;
             string barcodeDisplay = FormatBarcodeDisplay(barcode);
-            string zpl = BuildZpl(barcode, barcodeDisplay, chkShowBarcode.Checked);
+            string zpl = BuildZpl(barcode, barcodeDisplay, chkShowBarcode.Checked, copies);
 
             using var preview = new PrintPreviewForm(
                 zpl, barcodeDisplay, barcode, labelWidth, labelHeight, chkShowBarcode.Checked);
             if (preview.ShowDialog() != DialogResult.OK) return;
 
-            int copies = chkDoublePrint.Checked ? 2 : 1;
-            if (rdoCom.Checked) PrintViaCom(zpl, barcodeDisplay, showMessageBox: true, copies: copies);
-            else if (rdoUsb.Checked) PrintViaUsb(zpl, barcodeDisplay, showMessageBox: true, copies: copies);
-            else PrintViaEthernet(zpl, barcodeDisplay, showMessageBox: true, copies: copies);
+            if (rdoCom.Checked) PrintViaCom(zpl, barcodeDisplay, showMessageBox: true);
+            else if (rdoUsb.Checked) PrintViaUsb(zpl, barcodeDisplay, showMessageBox: true);
+            else PrintViaEthernet(zpl, barcodeDisplay, showMessageBox: true);
         }
 
         // ── 스캔 목록 일괄 인쇄 (자동 발행 OFF) ──────────────────────────
@@ -450,18 +443,21 @@ namespace ZplPrinter
             foreach (string barcode in _scannedBarcodes)
             {
                 string display = FormatBarcodeDisplay(barcode);
-                string zpl = BuildZpl(barcode, display, chkShowBarcode.Checked);
+                // copies를 ZPL ^PQ에 포함 — 루프 전송 방식 제거
+                string zpl = BuildZpl(barcode, display, chkShowBarcode.Checked, copies);
 
-                bool ok = rdoCom.Checked ? PrintViaCom(zpl, display, showMessageBox: false, copies: copies)
-                        : rdoUsb.Checked ? PrintViaUsb(zpl, display, showMessageBox: false, copies: copies)
-                                               : PrintViaEthernet(zpl, display, showMessageBox: false, copies: copies);
+                bool ok = rdoCom.Checked ? PrintViaCom(zpl, display, showMessageBox: false)
+                        : rdoUsb.Checked ? PrintViaUsb(zpl, display, showMessageBox: false)
+                                         : PrintViaEthernet(zpl, display, showMessageBox: false);
                 if (ok)
                 {
                     successCount++;
+                    // RFID 인코딩 완료 대기 (120ms → 1000ms)
+                    // 너무 빠른 연속 전송 시 프린터 버퍼 오버플로 및 위치 밀림 방지
+                    System.Threading.Thread.Sleep(1000);
                 }
                 else
                 {
-                    // 오류 발생: 성공한 항목은 목록에서 제거하고 중단
                     MessageBox.Show(
                         $"{successCount}/{total}개 인쇄 후 오류가 발생했습니다.\n" +
                         $"나머지 {total - successCount}개는 목록에 유지됩니다.",
@@ -472,7 +468,6 @@ namespace ZplPrinter
                 }
             }
 
-            // 전체 성공
             SetStatus($"✓ {total}개 바코드 인쇄 완료", success: true);
             MessageBox.Show(
                 $"{total}개 바코드 인쇄가 완료되었습니다.",
@@ -514,9 +509,6 @@ namespace ZplPrinter
             lblScanCount.Text = $"{_scannedBarcodes.Count} 개";
         }
 
-        /// <summary>
-        /// 목록 초기화 버튼 클릭 — 확인 후 목록을 비운다.
-        /// </summary>
         private void btnClearList_Click(object sender, EventArgs e)
         {
             if (_scannedBarcodes.Count == 0) return;
@@ -545,7 +537,7 @@ namespace ZplPrinter
             if (e.KeyCode != Keys.Enter) return;
 
             e.Handled = true;
-            e.SuppressKeyPress = true; // 텍스트박스에 개행 삽입 방지
+            e.SuppressKeyPress = true;
 
             string barcode = txtBarcode.Text.Trim();
 
@@ -555,7 +547,6 @@ namespace ZplPrinter
                 return;
             }
 
-            // 자동 발행 OFF → 목록에 추가
             if (barcode.Length != 12 || !long.TryParse(barcode, out _))
             {
                 ShowError("바코드는 12자리 숫자여야 합니다.");
@@ -567,9 +558,6 @@ namespace ZplPrinter
             txtBarcode.Focus();
         }
 
-        /// <summary>
-        /// 자동 발행 모드: 미리보기 없이 즉시 프린터로 전송.
-        /// </summary>
         private void PerformDirectPrint()
         {
             string barcode = txtBarcode.Text.Trim();
@@ -586,13 +574,14 @@ namespace ZplPrinter
                 return;
             }
 
-            string barcodeDisplay = FormatBarcodeDisplay(barcode);
-            string zpl = BuildZpl(barcode, barcodeDisplay, chkShowBarcode.Checked);
-
             int copies = chkDoublePrint.Checked ? 2 : 1;
-            bool success = rdoCom.Checked ? PrintViaCom(zpl, barcodeDisplay, showMessageBox: false, copies: copies)
-                         : rdoUsb.Checked ? PrintViaUsb(zpl, barcodeDisplay, showMessageBox: false, copies: copies)
-                                                : PrintViaEthernet(zpl, barcodeDisplay, showMessageBox: false, copies: copies);
+            string barcodeDisplay = FormatBarcodeDisplay(barcode);
+            // copies를 ZPL ^PQ에 포함 — 루프 전송 방식 제거
+            string zpl = BuildZpl(barcode, barcodeDisplay, chkShowBarcode.Checked, copies);
+
+            bool success = rdoCom.Checked ? PrintViaCom(zpl, barcodeDisplay, showMessageBox: false)
+                         : rdoUsb.Checked ? PrintViaUsb(zpl, barcodeDisplay, showMessageBox: false)
+                                          : PrintViaEthernet(zpl, barcodeDisplay, showMessageBox: false);
 
             if (success)
             {
@@ -605,35 +594,40 @@ namespace ZplPrinter
         private static string FormatBarcodeDisplay(string raw)
             => $"{raw[..3]}-{raw.Substring(3, 2)}-{raw[5..]}";
 
-        private static string BuildZpl(string barcode, string barcodeDisplay, bool showBarcode)
+        /// <summary>
+        /// ZPL 커멘드 문자열 생성.
+        ///
+        /// 수정 사항:
+        ///  1) ^LH0,0         — 라벨 원점 초기화 (누적 위치 밀림 방지)
+        ///  2) ^JZN            — RFID 실패 시 재인쇄 비활성화 (여분 라벨/위치 혼란 방지)
+        ///  3) ^PQ{copies}    — 매수를 ZPL 내에서 제어 (루프 전송 제거)
+        ///  4) ^HV 제거        — 호스트 응답 대기로 인한 타이밍 오류 방지
+        ///  5) StringBuilder  — verbatim 문자열 들여쓰기 공백이 ZPL에 포함되던 버그 수정
+        /// </summary>
+        private static string BuildZpl(string barcode, string barcodeDisplay, bool showBarcode, int copies = 1)
         {
+            var sb = new StringBuilder();
+            sb.AppendLine("^XA");
+            sb.AppendLine("^LH0,0");       // 라벨 원점 초기화 → 연속 인쇄 시 위치 밀림 방지
+            sb.AppendLine("^JZN");         // RFID 실패 시 자동 재인쇄 비활성화 → 여분 라벨 방지
+
             if (showBarcode)
             {
-                return
-                        $@"^XA
-                        ^FO360,180
-                        ^A0,50,50^FD{barcodeDisplay}^FS
-                        ^FO200,60
-                        ^BY4
-                        ^BCN,100,N,N,N^FD{barcode}^FS
-                        ^RFW,H,1,2,1^FD3000^FS
-                        ^RFW,A,2,12,1^FD{barcode}^FS
-                        ^RFR,A,^FN1^FS
-                        ^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
-                        ^PQ1
-                        ^XZ";
+                sb.AppendLine("^FO360,180");
+                sb.AppendLine($"^A0,50,50^FD{barcodeDisplay}^FS");
+                sb.AppendLine("^FO200,60");
+                sb.AppendLine("^BY4");
+                sb.AppendLine($"^BCN,100,N,N,N^FD{barcode}^FS");
             }
-            else
-            {
-                return
-                        $@"^XA
-                        ^RFW,H,1,2,1^FD3000^FS
-                        ^RFW,A,2,12,1^FD{barcode}^FS
-                        ^RFR,A,^FN1^FS
-                        ^FH_^HV1,,EPC-Ascii  DATA:[,]_0D_0A^FS
-                        ^PQ1
-                        ^XZ";
-            }
+
+            sb.AppendLine("^RFW,H,1,2,1^FD3000^FS");
+            sb.AppendLine($"^RFW,A,2,12,1^FD{barcode}^FS");
+            sb.AppendLine("^RFR,A,^FN1^FS");
+            // ^HV 제거: 호스트 응답 대기로 인한 버퍼 블로킹 및 타이밍 오류 방지
+            sb.AppendLine($"^PQ{copies}");
+            sb.AppendLine("^XZ");
+
+            return sb.ToString();
         }
 
         // ── 상태 표시 / 오류 ─────────────────────────────────────────────

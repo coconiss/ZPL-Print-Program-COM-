@@ -108,7 +108,7 @@ namespace ZplPrinter
             lblTitle.AutoSize = true;
 
             lblSubtitle = new System.Windows.Forms.Label();
-            lblSubtitle.Text = "COM Serial  ·  USB (RAW)  ·  Ethernet (TCP)  ·  ZPL  ·  300 DPI";
+            lblSubtitle.Text = "COM Serial  ·  USB (RAW)  ·  Ethernet (TCP)  ·  ZPL  ·  300 DPI  ·  v1.3";
             lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 8.5f);
             lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(120, 130, 160);
             lblSubtitle.Location = new System.Drawing.Point(26, 44);
