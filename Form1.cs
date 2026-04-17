@@ -601,7 +601,7 @@ namespace ZplPrinter
         ///  1) ^LH0,0         — 라벨 원점 초기화 (누적 위치 밀림 방지)
         ///  2) ^JZN            — RFID 실패 시 재인쇄 비활성화 (여분 라벨/위치 혼란 방지)
         ///  3) ^PQ{copies}    — 매수를 ZPL 내에서 제어 (루프 전송 제거)
-        ///  4) ^HV 제거        — 호스트 응답 대기로 인한 타이밍 오류 방지
+        ///  4) ^HV 제거        — 호스트 응답 대기로 인한 타이밍 오류 방지 : 이후 실제 RFID 프린터로 응답 테스트 후 적용예정
         ///  5) StringBuilder  — verbatim 문자열 들여쓰기 공백이 ZPL에 포함되던 버그 수정
         /// </summary>
         private static string BuildZpl(string barcode, string barcodeDisplay, bool showBarcode, int copies = 1)
