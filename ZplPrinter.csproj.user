@@ -10,6 +10,9 @@
     <Compile Update="PrintPreviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ProfileEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Form1.resx">

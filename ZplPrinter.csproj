@@ -15,7 +15,8 @@
     <ApplicationIcon>logo_blue_without_text.ico</ApplicationIcon>
 	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	<PublishSingleFile>false</PublishSingleFile>
-	<DebugType>none</DebugType>
+	<!--<DebugType>none</DebugType>-->
+	  <DebugType>portable</DebugType>
 	<DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
