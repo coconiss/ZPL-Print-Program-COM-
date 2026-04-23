@@ -4,18 +4,18 @@
     <_LastSelectedProfileId>D:\study\02.Business\21.다이소%28부산%29\라벨 프린트 테스트 프로그램\PrintProgram\Properties\PublishProfiles\FolderProfile1.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Form1.cs">
+    <Compile Update="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PrintPreviewForm.cs">
+    <Compile Update="UI\PrintPreviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ProfileEditorForm.cs">
+    <Compile Update="UI\ProfileEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Form1.resx">
+    <EmbeddedResource Update="UI\MainForm.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
