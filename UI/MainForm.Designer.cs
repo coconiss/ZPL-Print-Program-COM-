@@ -12,6 +12,9 @@ namespace ZplPrinter.UI
         private System.Windows.Forms.Button btnPrintSelected, btnPrintAll, btnEditProf, btnNewProf, btnDeleteProf, btnDeleteRow;
         private System.Windows.Forms.CheckBox chkShowBarcode, chkAutoPrint;
         private System.Windows.Forms.NumericUpDown nudCopies;
+        private System.Windows.Forms.MenuStrip menuStripMain;
+        private System.Windows.Forms.ToolStripMenuItem menuHelp;
+        private System.Windows.Forms.ToolStripMenuItem menuOpenSource;
 
         protected override void Dispose(bool disposing)
         {
@@ -57,6 +60,37 @@ namespace ZplPrinter.UI
             this.lblStop = new System.Windows.Forms.Label();
 
             this.SuspendLayout();
+
+            this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenSource = new System.Windows.Forms.ToolStripMenuItem();
+
+            // MenuStrip 설정 (다크 테마 적용)
+            this.menuStripMain.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            this.menuStripMain.ForeColor = System.Drawing.Color.White;
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.menuHelp });
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(920, 24);
+            this.menuStripMain.TabIndex = 0;
+
+            // 도움말 메뉴 설정
+            this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.menuOpenSource });
+            this.menuHelp.Name = "menuHelp";
+            this.menuHelp.Size = new System.Drawing.Size(72, 20);
+            this.menuHelp.Text = "도움말(&H)";
+
+            // 라이선스-오픈소스 서브메뉴 설정
+            this.menuOpenSource.BackColor = System.Drawing.Color.FromArgb(40, 40, 50);
+            this.menuOpenSource.ForeColor = System.Drawing.Color.White;
+            this.menuOpenSource.Name = "menuOpenSource";
+            this.menuOpenSource.Size = new System.Drawing.Size(186, 22);
+            this.menuOpenSource.Text = "라이선스 - 오픈소스";
+            this.menuOpenSource.Click += new System.EventHandler(this.menuOpenSource_Click);
+
+            // 폼에 MenuStrip 등록 (this.Controls.Add 목록에도 추가되어야 합니다)
+            this.Controls.Add(this.menuStripMain);
+            this.MainMenuStrip = this.menuStripMain;
 
             this.Text = "ZPL Universal RFID Printer PRO";
             // ── 폼 가로 사이즈 축소 (1100 -> 920) ──
@@ -196,6 +230,7 @@ namespace ZplPrinter.UI
             this.Controls.Add(pnlOptions);
             this.Controls.Add(pnlTop);
             this.Controls.Add(pnlBot);
+            this.menuStripMain.SendToBack();
             this.ResumeLayout(false);
         }
     }

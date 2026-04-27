@@ -302,5 +302,11 @@ namespace ZplPrinter.UI
             lblStatus.Text = $"{successCnt}건 발행 완료";
             return successCnt > 0;
         }
+
+        private void menuOpenSource_Click(object sender, EventArgs e)
+        {
+            using var licenseForm = new OpenSourceLicenseForm();
+            licenseForm.ShowDialog(this); // 현재 메인 폼을 부모로 하여 모달(Modal) 창으로 띄움
+        }
     }
 }

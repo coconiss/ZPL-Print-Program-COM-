@@ -7,6 +7,9 @@
     <Compile Update="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\OpenSourceLicenseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\PrintPreviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
